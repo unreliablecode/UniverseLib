@@ -58,6 +58,7 @@ namespace UniverseLib
             catch(Exception Ex)
             {
                 Console.WriteLine(Ex.Message);
+                return null;
             }
         }
 
