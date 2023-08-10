@@ -47,12 +47,18 @@ namespace UniverseLib
         [HideFromIl2Cpp]
         public static AssetBundle LoadFromMemory(byte[] binary, uint crc = 0)
         {
-            IntPtr ptr = ICallManager.GetICallUnreliable<d_LoadFromMemory>(
-                    "UnityEngine.AssetBundle::LoadFromMemory_Internal",
-                    "UnityEngine.AssetBundle::LoadFromMemory")
-                .Invoke(((Il2CppStructArray<byte>)binary).Pointer, crc);
-
-            return ptr != IntPtr.Zero ? new AssetBundle(ptr) : null;
+            try
+            {
+                IntPtr ptr = ICallManager.GetICallUnreliable<d_LoadFromMemory>(
+                        "UnityEngine.AssetBundle::LoadFromMemory_Internal",
+                        "UnityEngine.AssetBundle::LoadFromMemory")
+                    .Invoke(((Il2CppStructArray<byte>)binary).Pointer, crc);
+                return ptr != IntPtr.Zero ? new AssetBundle(ptr) : null;
+            }
+            catch(Exception Ex)
+            {
+                Console.WriteLine(Ex.Message);
+            }
         }
 
         // AssetBundle.GetAllLoadedAssetBundles()
